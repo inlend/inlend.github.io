@@ -1,0 +1,99 @@
+@font-face {
+  font-family: 'Oxygen Mono';
+  src: 
+  		url('fonts/oxygen-mono-v13-latin-regular.woff2') format('woff2'),
+      url('fonts/oxygen-mono-v13-latin-regular.woff') format('woff'),
+      url('fonts/oxygen-mono-v13-latin-regular.otf') format('opentype'),
+      url('fonts/oxygen-mono-v13-latin-regular.ttf') format('truetype');
+}
+
+html {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	scroll-behavior: smooth;
+
+	
+}
+
+body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	cursor: crosshair;
+}
+
+audio {
+  width: 80vw;
+  left: 50px;
+  left: 50%;
+  transform: translate(10%, 0%);
+  bottom: 5px;
+}
+
+.wrapper {
+
+	
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	
+	position: fixed;
+	display: block;
+	overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  
+
+  scrollbar-color: #a8a7a2 white;
+}
+
+.flex-container {
+	display: flex;
+	align-items: center;
+  justify-content: center;
+  width: 99,5%;
+  height: 100%;
+  scroll-snap-align: center;
+}
+
+.image {
+	max-width: 90%;
+	max-height: 90%;
+	margin: 0 auto;
+}
+
+ p {
+  color: #808080;
+  font-size: 16px;
+  font-family: 'Oxygen Mono', monospace;
+  padding-top: 0px;
+  padding-left: 10px;
+ }
+
+ a {
+ 	font-family: 'Oxygen Mono', monospace;
+  color: #808080;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+a:hover {
+  padding-left: 6px;
+  color: purple;
+}
+
+.loading-animation {
+	width: 28vw; 
+	height: 28vw; 
+	position: fixed; 
+	top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+
+

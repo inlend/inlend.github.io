@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title> ← </title>
+    <!--<link rel="icon" type="image/x-icon" href="media/favicon.png">-->
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="media/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="media/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="media/icons/favicon-16x16.png">
+
+    <link rel="stylesheet" type="text/css" href="style_index.css">
+
+  </head>
+
+  <body>
+
+    <div class="outer_frame"> </div>
+
+    <div class="container">
+     
+      <div class="item item-a1" id="petal"> <img src="thumbnails/petal.png"> </div>
+      <div class="item item-a2" id="bells">  <img src="thumbnails/bells.svg"> </div>
+      <div class="item item-a3" id="dentons"> <img src="thumbnails/dentons.png"> </div>
+      <div class="item item-a4" id="glare"> <img src="thumbnails/glare.png"> </div>
+
+      <div class="item item-a5 navigation"> <img src="thumbnails/close.svg" onclick="relaod()"> </div>
+
+      <div class="item item-a6" id="sunbox"> <img src="thumbnails/sunbox.svg"> </div>
+      <div class="item item-a7" id="loom"> <img src="thumbnails/loom.svg"> </div>
+      <div class="item item-a8" id="trust"> <img src="thumbnails/trust.gif"> </div>
+      <div class="item item-a9" id="suns"> <img src="thumbnails/suns.svg"> </div>
+      <div class="item item-a10" id="inlet"> <img src="thumbnails/inlet.svg"> </div>
+      <div class="item item-a11" id="mainstay"> <img src="thumbnails/mainstay.svg"> </div>
+      <div class="item item-a12" id="central_station"> <img src="thumbnails/central_station.png"> </div>
+
+      <div class="item item-a13 navigation"> <img src="thumbnails/arrow-right.svg" onclick="move_right()"> </div>
+
+      <div class="item item-a14" id="cgi"> <img src="thumbnails/cgi.svg"> </div>
+      <div class="item item-a15" id="drawings"> <img src="thumbnails/drawings.png"> </div>
+      <div class="item item-a16" id="tts"> <img src="thumbnails/tts.png"> </div>
+      <div class="item item-a17" id="about"> <img src="thumbnails/about.svg"> </div>
+      <div class="item item-a18" id="star"> <img src="thumbnails/star.svg"> </div>
+      <div class="item item-a19" id="walkc"> <img src="thumbnails/walkc.svg"> </div>
+      <div class="item item-a20" id="atones"> <img src="thumbnails/atones.svg"> </div>
+
+      <div class="item item-a21 navigation"> <img src="thumbnails/fullscreen.svg" onclick="openfullscreen()"> </div>
+
+      <div class="item item-a22" id="soft"> <img src="thumbnails/soft.svg"> </div>
+      <div class="item item-a23" id="photos"> <img src="thumbnails/photos.png"> </div>
+      <div class="item item-a24" id="drawings2"> <img src="thumbnails/drawings2.svg"> </div>
+      <div class="item item-a25" id="gm2"> <img src="thumbnails/gm2.png"> </div>
+      <div class="item item-a26" id="ca"> <img src="thumbnails/ca.png"> </div>
+      <div class="item item-a27" id="hallways"> <img src="thumbnails/hallways.svg"> </div>
+      <div class="item item-a28" id="window"> <img src="thumbnails/window.png"> </div>
+
+      <div class="item item-a29 navigation"> <img src="thumbnails/arrow-left.svg" onclick="move_left()"> </div>
+
+      <div class="item item-a30" id="subscendence"> <img src="thumbnails/subscendence.gif"> </div>
+      <div class="item item-a31" id="plotter"> <img src="thumbnails/plotter.svg"> </div>
+      <div class="item item-a32" id="gardenmusic"> <img src="thumbnails/gardenmusic.svg"> </div>
+
+
+
+      <div class="e" id="viewport"> 
+        <iframe id="iframe"> </iframe> 
+        <div id="close-button"> <img src="thumbnails/close.svg" onclick="closefullscreen()">
+        <div id="right-button"> <img src="thumbnails/arrow-right.svg" onclick="move_right()">
+        <div id="left-button"> <img src="thumbnails/arrow-left.svg" onclick="move_left()">
+      </div>
+
+    </div>
+
+
+    <script type="text/javascript">
+
+        //list of all projects, starting from top left and going around clockwise (navigation elements not included)
+        var prj = ['petal', 'bells', 'dentons','glare', 'sunbox', 'loom', 'trust', 'suns', 'inlet', 'mainstay', 'central_station', 'cgi', 'drawings', 'tts', 'about', 'star', 'walkc', 'atones', 'soft', 'photos', 'drawings2', 'gm2', 'ca', 'hallways', 'window', 'subscendence', 'plotter', 'gardenmusic'];
+       
+        var random = Math.random();
+        current = (random<0.25) ? 9 : (random<0.5) ? 22 : (random<0.75) ? 4 : 2;
+        //var current = -1;
+        open_prj(prj[current]);
+
+        prj.forEach(assign_prj);
+
+        function assign_prj(y) {
+          document.getElementById(y).addEventListener("click", () => {
+            open_prj(y);
+            current = prj.indexOf(y);
+          })
+        }
+
+        function open_prj(x) {
+          document.getElementById("iframe").src='projects/' + x + '.html';
+          deactivate_items();
+          document.getElementById(x).classList.add("active");
+        }
+
+        function move_right() {
+          current = (current+1)%prj.length;
+          open_prj(prj[current]);
+        }
+
+        function move_left() {
+          current = (current-1)%prj.length;
+          if (current < 0) {
+            current = prj.length-1;
+          }
+          open_prj(prj[current]);
+        }
+
+        function closefullscreen() {
+          document.getElementById("viewport").classList.remove("fullscreen");
+          document.getElementById("close-button").style.display = "none";
+        }
+
+        function openfullscreen() {
+          if (current >= 0) {
+            document.getElementById("viewport").classList.add("fullscreen");
+            document.getElementById("close-button").style.display = "flex";
+            document.getElementById("right-button").style.display = "flex";
+            document.getElementById("left-button").style.display = "flex";
+          }
+        }
+
+        function relaod() {
+          document.getElementById("iframe").src='projects/home.html';
+          deactivate_items();
+        }
+
+        //make sure all other elements don't have active class enabled
+        function deactivate_items() {
+          var items = document.getElementsByClassName('item');
+            for (var i=0; i<items.length; i++) {
+              items[i].classList.remove("active");
+            }
+        }
+
+    </script> 
+
+  </body>
+
+</html>
