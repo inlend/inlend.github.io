@@ -296,12 +296,19 @@ iframe {
 
 @media (orientation:portrait) {
   .container {
-    width: 96vw;
-    height: 96vw;
+    width: 94vw;
+    height: 94vw;
   }
   .outer_frame {
-    width: 97vw;
-    height: 97vw;
+    width: 95vw;
+    height: 95vw;
+  }
+  .fullscreen {
+    width: 95vw; 
+    height: 92vh; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   #sitemap{
     display: none;
