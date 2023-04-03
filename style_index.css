@@ -305,7 +305,7 @@ iframe {
   }
   .fullscreen {
     width: 95vw; 
-    height: 92vh; 
+    height: 89vh; 
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
