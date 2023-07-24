@@ -9,8 +9,6 @@
 
     <title> ← </title>
     <!--<link rel="icon" type="image/x-icon" href="media/favicon.png">-->
-
-
     <link rel="apple-touch-icon" sizes="180x180" href="media/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="media/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="media/icons/favicon-16x16.png">
@@ -24,6 +22,8 @@
     <div class="outer_frame"> </div>
 
     <div class="container">
+
+      <!-- Icons / Items -->
      
       <div class="item item-a1" id="petal"> <img src="thumbnails/petal.jpg"> </div>
       <div class="item item-a2" id="bells">  <img src="thumbnails/bells.svg"> </div>
@@ -66,7 +66,7 @@
       <div class="item item-a31" id="plotter"> <img src="thumbnails/plotter.svg"> </div>
       <div class="item item-a32" id="gardenmusic"> <img src="thumbnails/gardenmusic.svg"> </div>
 
-
+      <!-- Vieport -->
 
       <div class="e" id="viewport"> 
         <iframe id="iframe"> </iframe> 
@@ -84,8 +84,7 @@
         var prj = ['petal', 'bells', 'dentons','glare', 'sunbox', 'loom', 'trust', 'suns', 'inlet', 'mainstay', 'central_station', 'cgi', 'drawings', 'tts', 'about', 'star', 'walkc', 'atones', 'soft', 'photos', 'drawings2', 'gm2', 'ca', 'hallways', 'window', 'subscendence', 'plotter', 'gardenmusic'];
        
         var random = Math.random();
-        current = (random<0.25) ? 1 : (random<0.5) ? 2 : (random<0.75) ? 4 : 9;
-        //var current = -1;
+        var current = (random<0.25) ? 1 : (random<0.5) ? 2 : (random<0.75) ? 4 : 9;
         open_prj(prj[current]);
 
         prj.forEach(assign_prj);
