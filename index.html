@@ -84,7 +84,7 @@
         var prj = ['petal', 'bells', 'dentons','glare', 'sunbox', 'loom', 'trust', 'suns', 'inlet', 'mainstay', 'central_station', 'cgi', 'drawings', 'tts', 'about', 'star', 'walkc', 'atones', 'soft', 'photos', 'drawings2', 'gm2', 'ca', 'hallways', 'window', 'subscendence', 'plotter', 'gardenmusic'];
        
         var random = Math.random();
-        current = (random<0.25) ? 9 : (random<0.5) ? 1 : (random<0.75) ? 4 : 2;
+        current = (random<0.25) ? 1 : (random<0.5) ? 2 : (random<0.75) ? 4 : 9;
         //var current = -1;
         open_prj(prj[current]);
 
@@ -127,6 +127,9 @@
             document.getElementById("close-button").style.display = "flex";
             document.getElementById("right-button").style.display = "flex";
             document.getElementById("left-button").style.display = "flex";
+            //solve problem of objects not scrolling properly in fullscreen when selected from the main box view
+            document.getElementById("iframe").tabIndex = '-1';
+            document.getElementById("iframe").focus();
           }
         }
 
