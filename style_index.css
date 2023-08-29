@@ -307,7 +307,7 @@ iframe {
   }
   .fullscreen {
     width: calc(100vw - 5vw);
-    height: calc(100vh - 5vw);
+    height: calc(100vh - 25vw);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
