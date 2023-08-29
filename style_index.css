@@ -102,6 +102,7 @@ p a:hover {
 
 .item img{
   width: 100%;
+  filter: grayscale(0%);
 }
 
 .item img:hover{
@@ -114,12 +115,13 @@ p a:hover {
 
 .active {
   transform: scale(0.8);
-  /*outline: solid 5px lightsteelblue;*/ 
   border: solid #000;
   border-width: 5px;
   border-image: url("media/f2.gif") 14% stretch;
   pointer-events: none;
 }
+
+
 
 .e {
   grid-area: e;
@@ -134,8 +136,8 @@ p a:hover {
 }
 
 .fullscreen {
-  width: 98vw; 
-  height: 98vh; 
+  width: calc(100vw - 4vw);
+  height: calc(100vh - 4vw);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -304,8 +306,8 @@ iframe {
     height: 95vw;
   }
   .fullscreen {
-    width: 95vw; 
-    height: 89vh; 
+    width: calc(100vw - 5vw);
+    height: calc(100vh - 5vw);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
