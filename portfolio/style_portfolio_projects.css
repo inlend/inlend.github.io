@@ -37,18 +37,6 @@ audio {
   bottom: 5px;
 }
 
-.wrapper {
-	height: 100%;
-	width: 100%;
-	margin: 0;
-	padding: 0;
-	position: fixed;
-	display: block;
-	overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-  scrollbar-color: #a8a7a2 white;
-}
-
 .cursor-prev {
   cursor: w-resize;
 }
@@ -57,29 +45,10 @@ audio {
   cursor: e-resize;
 }
 
-
-/*.outer-flex-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: calc((100vh/13)*0.4);
-  width: 100%;
-  height: 94%;
-  scroll-snap-align: center;
-  border-bottom: dashed var(--grey-color) 1px;
-} */
-
-/*.image {
-  max-width: 88%;
-  max-height: 88%;
-  margin: 0 auto;
-}*/
-
 .flex-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: calc((100vh/13)*0.4);
   gap: calc((100vh/13)*0.85 );
   width: 100%;
   height: 94%;
@@ -94,6 +63,7 @@ audio {
 .image {
 	max-width: 87%;
 	max-height: 87%;
+  border: dashed var(--grey-color) 1px;
 }
 
 .landscape {
@@ -135,6 +105,45 @@ a:hover {
   transform: translate(-50%, -50%);
   z-index: -1;
 }
+
+
+
+@media only screen and (max-aspect-ratio: 13/9) {
+  .landscape {
+    max-width: 60%;
+    max-height: 60%;
+  }
+  .flex-container {
+    gap: calc((100vh/13)*0.65 );
+  }
+}
+
+@media only screen and (max-aspect-ratio: 11.5/9) {
+  .double {
+    max-width: 75%;
+    max-height: 75%;
+  }
+  .landscape {
+    max-width: 50%;
+    max-height: 50%;
+  }
+  .flex-container {
+  gap: calc((100vh/13)*0.45 );
+  }
+}
+
+@media only screen and (max-aspect-ratio: 9.5/9) {
+  .double {
+    max-width: 60%;
+    max-height: 60%;
+  }
+  .landscape {
+    max-width: 45%;
+    max-height: max-width;
+  }
+}
+
+
 
 
 
