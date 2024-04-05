@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="design student based in berlin">
+
+
+    <title> portfolio </title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../media/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../media/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../media/icons/favicon-16x16.png">
+
+    <link rel="stylesheet" type="text/css" href="portfolio/style_portfolio.css">
+
+  </head>
+
+  <body>
+
+  
+
+
+
+    <div id="mobile_message"> <p> Find a link to my portfolio <a href="https://bastianschwenteck.info/portfolio_24.pdf"> >here </a> or open this website on a desktop in order to view it online. Thank you! ✿</p> </div>
+
+
+
+    <div class="container">
+
+      <div class="item item-a1" id="p1"> <img src="portfolio/thumbnails/posters.jpg"> </div>
+      <div class="item item-a2" id="p2"> <img src="portfolio/thumbnails/motion_reel.gif"> </div>
+      <div class="item item-a3" id="p3"> <img src="portfolio/thumbnails/cg1.jpg"> </div>
+      <div class="item item-a4" id="p4"> <img src="portfolio/thumbnails/plan_b.jpg"> </div>
+      <div class="item item-a5" id="p5"> <img src="portfolio/thumbnails/leana.jpg"> </div>
+      <div class="item item-a6" id="p6"> <img src="portfolio/thumbnails/graphics1.jpg"> </div>
+      <div class="item item-a7" id="p7"> <img src="portfolio/thumbnails/rokko.jpg"> </div>
+      <div class="item item-a8" id="p8"> <img src="portfolio/thumbnails/missing_love.jpg"> </div>
+      <div class="item item-a9" id="p9"> <img src="portfolio/thumbnails/acting.jpg"> </div>  
+      <div class="item item-a10" id="p10"> <img src="portfolio/thumbnails/visible_speech.jpg"> </div>
+      <div class="item item-a11" id="p11"> <img src="portfolio/thumbnails/glare.jpg"> </div>
+      <div class="item item-a12" id="p12"> <img src="portfolio/thumbnails/bells.gif"> </div>
+
+      <div class="item item-a13" id="p13"> <img src="portfolio/thumbnails/sceen_memory.gif"> </div>
+      <div class="item item-a14" id="p14"> <img src="portfolio/thumbnails/graphics.svg"> </div>
+      <div class="item item-a15 none" id="p15"> <img src="portfolio/thumbnails/none.svg"> </div>
+    
+      <div class="item item-a16 none" id="p16"> <img src="portfolio/thumbnails/none.svg"> </div>
+      <div class="item item-a17 none" id="p17"> <img src="portfolio/thumbnails/none.svg"> </div>
+      <div class="item item-a18 none" id="p18"> <img src="portfolio/thumbnails/none.svg"> </div>
+
+      <div class="item item-a19 navigation"> <img src="portfolio/thumbnails/arrow-left.svg" onclick="move_left()"> </div>
+      <div class="item item-a20 navigation" id="about"> <img src="portfolio/thumbnails/about.svg"> </div>
+      <div class="item item-a21 navigation"> <img src="portfolio/thumbnails/arrow-right.svg" onclick="move_right()"> </div>
+      <div class="item item-a22 navigation"> <a href="https://bastianschwenteck.info/"> <img src="portfolio/thumbnails/home.svg"> </a> </div>
+      <div class="item item-a23 navigation"> <img src="portfolio/thumbnails/close.svg" onclick="relaod()"> </div>
+      <div class="item item-a24 navigation"> <a href="mailto:bastian.schwenteck@outlook.com"> <img src="portfolio/thumbnails/mail.svg"> </a> </div>
+      
+      <div class="item item-a25 textbox"> <p id="textbox" lang="en-GB"></p> </div>
+
+      <div class="e" id="viewport"> 
+        <iframe id="iframe"> </iframe> 
+
+        
+      </div>
+
+    </div>
+
+    <script src="portfolio/descriptions.js"></script>  
+
+
+    <script type="text/javascript">
+      window.addEventListener('message', function(event) {
+        if (event.data == "right") {
+          move_right();
+          console.log(event.data);
+        } else if (event.data == "left") {
+          move_left();
+        } 
+      });
+    </script>
+
+    
+
+    <script type="text/javascript">
+
+        //list of all projects, starting from top left and going around clockwise (navigation elements not included)
+        var prj = ['p1', 'p2', 'p3','p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'p10', 'p11', 'p12', 'p13', 'p14', 'about'];
+        var current = 0;
+       
+        open_prj(prj[current]);
+
+        prj.forEach(assign_prj);
+
+        function assign_prj(y) {
+          document.getElementById(y).addEventListener("click", () => {
+            current = prj.indexOf(y);
+            open_prj(y);
+          })
+        }
+
+        function open_prj(x) {
+          document.getElementById("iframe").src='portfolio/portfolio_projects/' + x + '.html';
+          document.getElementById("textbox").innerHTML = description[current];
+          deactivate_items();
+          document.getElementById(x).classList.add("active");
+        }
+
+        function move_right() {
+          current = (current+1)%prj.length;
+          open_prj(prj[current]);
+        }
+
+        function move_left() {
+          current = (current-1)%prj.length;
+          if (current < 0) {
+            current = prj.length-1;
+          }
+          open_prj(prj[current]);
+        }
+        
+        function relaod() {
+          document.getElementById("iframe").src='portfolio/portfolio_projects/home.html';
+          deactivate_items();
+        }
+
+        //make sure all other elements don't have active class enabled
+        function deactivate_items() {
+          var items = document.getElementsByClassName('item');
+            for (var i=0; i<items.length; i++) {
+              items[i].classList.remove("active");
+            }
+        }
+
+    </script>
+
+    </body>
+
+</html>
