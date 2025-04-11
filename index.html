@@ -57,11 +57,11 @@
 
     <div class="item item-a22" id="soft"> <img src="thumbnails/soft.svg"> </div>
     <div class="item item-a23" id="photos"> <img src="thumbnails/photos.jpg"> </div>
-    <div class="item item-a24" id="drawings2"> <img src="thumbnails/drawings2.svg"> </div>
+    <div class="item item-a24" id="window"> <img src="thumbnails/window.jpg"> </div>
     <div class="item item-a25" id="gm2"> <img src="thumbnails/gm2.jpg"> </div>
     <div class="item item-a26" id="ca"> <img src="thumbnails/ca.jpg"> </div>
     <div class="item item-a27" id="hallways"> <img src="thumbnails/hallways.svg"> </div>
-    <div class="item item-a28" id="window"> <img src="thumbnails/window.jpg"> </div>
+    <div class="item item-a28" id="drawings2"> <img src="thumbnails/drawings2.jpg"> </div>
 
     <div class="item item-a29 navigation"> <img src="thumbnails/arrow-left.svg" onclick="move_left()"> </div>
 
@@ -84,10 +84,10 @@
         <script type="text/javascript">
 
           //list of all projects, starting from top left and going around clockwise (navigation elements not included)
-          var prj = ['petal', 'bells', 'dentons', 'glare', 'sunbox', 'scene19', 'trust', 'suns', 'inlet', 'mainstay', 'central_station', 'cgi', 'wind_harp', 'tts', 'about', 'star', 'screen_memory_project', 'atones', 'soft', 'photos', 'drawings2', 'gm2', 'ca', 'hallways', 'window', 'cavity', 'plotter', 'gardenmusic'];
+          var prj = ['petal', 'bells', 'dentons', 'glare', 'sunbox', 'scene19', 'trust', 'suns', 'inlet', 'mainstay', 'central_station', 'cgi', 'wind_harp', 'tts', 'about', 'star', 'screen_memory_project', 'atones', 'soft', 'photos', 'window', 'gm2', 'ca', 'hallways', 'drawings2', 'cavity', 'plotter', 'gardenmusic'];
 
           var random = Math.random();
-          var current = (random < 0.333) ? 2 : (random < 0.666) ? 12 : 9;
+          var current = (random < 0.333) ? 1 : (random < 0.666) ? 12 : 9;
           open_prj(prj[current]);
 
           prj.forEach(assign_prj);
