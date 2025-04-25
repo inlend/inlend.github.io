@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+</head>
+
+<body>
+
+
+
+
+    <script>
+
+        addEventListener("keypress", function () {
+            var el = document.documentElement,
+                rfs = el.requestFullscreen
+                    || el.webkitRequestFullScreen
+                    || el.mozRequestFullScreen
+                    || el.msRequestFullscreen
+                ;
+            rfs.call(el);
+        });
+
+        var today = new Date();
+        var day = today.getDate();
+        var month = today.getMonth() + 1;
+        var year = today.getFullYear();
+
+        var delay_time = 1000;
+        var sf = 2.5;
+        var k_value = crossSum(day, month, year);
+
+        var containerDiv = document.createElement('div');
+        document.body.appendChild(containerDiv);
+        containerDiv.style.position = "fixed";
+        containerDiv.style.left = (100 - (sf * 11)) / 2 + "vw";
+        containerDiv.style.top = "28vh";
+        containerDiv.style["mix-blend-mode"] = "screen";
+        containerDiv.setAttribute("id", "container");
+
+        drawNumbers();
+
+        drawNumbers();
+
+        setTimeout(() => {
+            redrawNumbers();
+            setInterval(redrawNumbers, 30000);
+        }, 30000);
+
+        function createVideo(src, time, posX, posY, scale) {
+            setTimeout(() => {
+                var vid = document.createElement('video');
+                vid.src = "vid/" + src + ".mp4";
+                document.getElementById('container').appendChild(vid);
+                vid.muted = true;
+                vid.autoplay = true;
+                vid.style["mix-blend-mode"] = "screen";
+                vid.style["filter"] = "blur(0px)";
+                vid.style.width = scale * sf + "vw";
+                vid.style.position = "absolute";
+                vid.style.left = posX * sf + "vw";
+                vid.style.top = posY * sf + "vw";
+                vid.setAttribute("id", "ooo");
+            }, time);
+        }
+
+        function drawNumbers() {
+            var k_value = crossSum(day, month, year);
+            var sq_pos = 1.2;
+            var sq_src = 10;
+
+            createVideo((day - (day % 10)) / 10 + "-1", delay_time * 0, 0, 0, 1);
+            createVideo(day % 10 + "-2", delay_time * 1, 1, 0, 1);
+            createVideo("m" + month, delay_time * 2, 2, 0, 2);
+            createVideo((year % 100 - year % 10) / 10 + "-1", delay_time * 4, 4, 0, 1);
+            createVideo(year % 10 + "-2", delay_time * 5, 5, 0, 1);
+            createVideo("arrow", delay_time * 6, 6, 0, 2);
+            createVideo("k", delay_time * 8, 8, 0, 1);
+            createVideo((k_value - (k_value % 10)) / 10 + "-1", delay_time * 10, 9, 0, 1);
+            createVideo(k_value % 10 + "-2", delay_time * 11, 10, 0, 1);
+
+            for (var i = 0; i < 7; i++) {
+                if (k_value < 0) {
+                    return;
+                } else if (k_value >= 10) {
+                    createVideo("sq" + (10 + ((i + 1) % 3)), (delay_time * 12) + (i * 2000), 1.5, sq_pos, 8);
+                } else {
+                    createVideo("sq" + k_value % 10, (delay_time * 12) + (i * 2000), 1.5, sq_pos, 8);
+                }
+                k_value -= 10;
+                sq_pos += 1.2;
+            }
+        }
+
+        function redrawNumbers() {
+            document.querySelectorAll('video').forEach(video => video.remove());
+
+            var temp_day = 0;
+            var temp_month = 0;
+            var temp_year = 0;
+
+            temp_day = calculateNextDay(day, month, year)[0];
+            temp_month = calculateNextDay(day, month, year)[1];
+            temp_year = calculateNextDay(day, month, year)[2];
+
+            day = temp_day;
+            month = temp_month;
+            year = temp_year;
+
+            drawNumbers();
+        }
+
+        function crossSum(DayNum, MonthNum, YearNum) {
+            var sum = 0;
+            var YearSum = 0;
+            var MonthSum = 0;
+
+            while (MonthNum > 0) {
+                MonthSum = MonthSum + MonthNum % 10;
+                MonthNum = MonthNum / 10;
+            }
+            while (YearNum > 100) {
+                YearSum = YearSum + YearNum % 10;
+                YearNum = YearNum / 10;
+            }
+            sum = Math.floor(DayNum + MonthSum + YearSum);
+            return sum;
+        }
+
+        function calculateNextDay(curDay, curMonth, curYear) {
+            var nextDay = curDay;
+            var nextMonth = curMonth;
+            var nextYear = curYear;
+            var nextDate = [];
+            var monthLenght = 31;
+
+            if (curYear % 4 == 0 && curMonth == 2) {
+                monthLenght = 29;
+            } else if (curMonth == 2) {
+                monthLenght = 28;
+            } else if (curMonth == 4 | curMonth == 6 | curMonth == 9 | curMonth == 11) {
+                monthLenght = 30;
+            } else {
+                monthLenght = 31;
+            }
+
+            if (curDay >= monthLenght) {
+                nextDay = 1;
+            } else {
+                nextDay = curDay + 1;
+            }
+
+            if (nextDay == 1) {
+                nextMonth = curMonth + 1;
+            }
+
+            if (nextMonth == 13) {
+                nextMonth = 1;
+                nextYear = curYear + 1;
+            } else {
+                nextYear = curYear;
+            }
+
+            if (nextYear == 3000) {
+                nextYear = 2000;
+                nextDay = 1;
+                nextMonth = 1;
+            }
+
+            nextDate[0] = nextDay;
+            nextDate[1] = nextMonth;
+            nextDate[2] = nextYear;
+
+            return nextDate;
+        }
+
+        function calculatePreviousDay(curDay, curMonth, curYear) {
+            var prevDay = curDay;
+            var prevMonth = curMonth;
+            var prevYear = curYear;
+            var prevDate = [];
+            var monthLenght = 31;
+
+            if (curDay == 1 && curMonth == 1 && curYear != 1) {
+                prevYear = curYear - 1;
+            } else if (curDay == 1 && curMonth == 1 && curYear == 1) {
+                prevYear = 3000;
+            } else {
+                prevYear = curYear;
+            }
+
+            if (curDay == 1 && curMonth != 1) {
+                prevMonth = curMonth - 1;
+            } else if (curDay == 1 && curMonth == 1) {
+                prevMonth = 12;
+            } else {
+                prevMonth = curMonth;
+            }
+
+            if (prevYear % 4 == 0 && prevMonth == 2) {
+                monthLenght = 29;
+            } else if (prevMonth == 2) {
+                monthLenght = 28;
+            } else if (prevMonth == 4 | prevMonth == 6 | prevMonth == 9 | prevMonth == 11) {
+                monthLenght = 30;
+            } else {
+                monthLenght = 31;
+            }
+
+            if (curDay == 1) {
+                prevDay = monthLenght;
+            } else {
+                prevDay = curDay - 1;
+            }
+
+            if (prevYear == 0) {
+                prevYear = 3000;
+                prevDay = 31;
+                prevMonth = 12;
+            }
+
+            prevDate[0] = prevDay;
+            prevDate[1] = prevMonth;
+            prevDate[2] = prevYear;
+
+
+            return prevDate;
+        }
+
+    </script>
+</body>
+
+</html>
