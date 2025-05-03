@@ -20,10 +20,23 @@
     </video>
 
     <script>
+
+        addEventListener("keypress", function () {
+            var el = document.documentElement,
+                rfs = el.requestFullscreen
+                    || el.webkitRequestFullScreen
+                    || el.mozRequestFullScreen
+                    || el.msRequestFullscreen
+                ;
+            rfs.call(el);
+        });
+
         document.getElementsById('video').onended = function () {
             this.load();
             this.play();
         };
+
+
 
     </script>
 
