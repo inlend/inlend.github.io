@@ -10,8 +10,17 @@
 
 
 
-
     <script>
+
+        // body.onload = function () {
+        //     var el = document.documentElement,
+        //         rfs = el.requestFullscreen
+        //             || el.webkitRequestFullScreen
+        //             || el.mozRequestFullScreen
+        //             || el.msRequestFullscreen
+        //         ;
+        //     rfs.call(el);
+        // };
 
         addEventListener("keypress", function () {
             var el = document.documentElement,
@@ -28,7 +37,9 @@
         var month = today.getMonth() + 1;
         var year = today.getFullYear();
 
-        var delay_time = 1000;
+        var speed = 60000;
+
+        var delay_time = 1100;
         var sf = 2.5;
         var k_value = crossSum(day, month, year);
 
@@ -46,11 +57,14 @@
 
         setTimeout(() => {
             redrawNumbers();
-            setInterval(redrawNumbers, 30000);
-        }, 30000);
+            setInterval(redrawNumbers, speed);
+        }, speed);
 
         function createVideo(src, time, posX, posY, scale) {
             setTimeout(() => {
+                containerDiv.style["opacity"] = "1";
+                containerDiv.style["transition"] = "opacity 0s";
+
                 var vid = document.createElement('video');
                 vid.src = "vid/" + src + ".mp4";
                 document.getElementById('container').appendChild(vid);
@@ -62,8 +76,13 @@
                 vid.style.position = "absolute";
                 vid.style.left = posX * sf + "vw";
                 vid.style.top = posY * sf + "vw";
-                vid.setAttribute("id", "ooo");
+                // vid.setAttribute("id", "ooo");
             }, time);
+
+            setTimeout(() => {
+                containerDiv.style["transition"] = "opacity 30s ease-out";
+                containerDiv.style["opacity"] = "0";
+            }, speed / 2);
         }
 
         function drawNumbers() {

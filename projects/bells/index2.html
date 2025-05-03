@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+</head>
+
+<body>
+
+    <video autoplay muted loop id="video" style="
+    position: fixed; right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    mix-blend-mode: difference;
+    opacity: 0.5;">
+
+        <source src="ex3.mp4" type="video/mp4">
+    </video>
+
+    <script>
+        document.getElementsById('video').onended = function () {
+            this.load();
+            this.play();
+        };
+
+    </script>
+
+</body>
+
+</html>
