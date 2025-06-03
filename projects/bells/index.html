@@ -10,17 +10,22 @@
 
 
 
-    <script>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
 
-        // body.onload = function () {
-        //     var el = document.documentElement,
-        //         rfs = el.requestFullscreen
-        //             || el.webkitRequestFullScreen
-        //             || el.mozRequestFullScreen
-        //             || el.msRequestFullscreen
-        //         ;
-        //     rfs.call(el);
-        // };
+        body {
+            /* background: linear-gradient(180deg, rgb(35, 35, 35) 0%, rgba(212, 212, 212, 1) 100%); */
+            background-image: url("bg.jpg");
+            background-size: cover;
+        }
+    </style>
+
+
+    <script>
 
         addEventListener("keypress", function () {
             var el = document.documentElement,
@@ -34,24 +39,37 @@
 
         var today = new Date();
         var day = today.getDate();
+        var day = 31;
+
         var month = today.getMonth() + 1;
+        var month = 8;
+
+
         var year = today.getFullYear();
 
         var speed = 60000;
 
-        var delay_time = 1100;
-        var sf = 2.5;
+        var delay_time = 0;
+        // var delay_time = 1400;
+        // var sf = 2.5;
+        var sf = 3;
         var k_value = crossSum(day, month, year);
 
         var containerDiv = document.createElement('div');
         document.body.appendChild(containerDiv);
         containerDiv.style.position = "fixed";
         containerDiv.style.left = (100 - (sf * 11)) / 2 + "vw";
-        containerDiv.style.top = "28vh";
-        containerDiv.style["mix-blend-mode"] = "screen";
+
+        containerDiv.style.top = "27vh";
+
+        containerDiv.style["filter"] = "invert(1)";
+        containerDiv.style["mix-blend-mode"] = "multiply";
+        containerDiv.style["filter"] = "opacity(40%)";
+        // containerDiv.style["transform"] = "perspective(1cm) rotateX(28deg) rotateY(0deg)";
+        containerDiv.style["transform-style"] = "preserve-3d";
         containerDiv.setAttribute("id", "container");
 
-        drawNumbers();
+
 
         drawNumbers();
 
@@ -70,7 +88,7 @@
                 document.getElementById('container').appendChild(vid);
                 vid.muted = true;
                 vid.autoplay = true;
-                vid.style["mix-blend-mode"] = "screen";
+                vid.style["mix-blend-mode"] = "multiply";
                 vid.style["filter"] = "blur(0px)";
                 vid.style.width = scale * sf + "vw";
                 vid.style.position = "absolute";
@@ -80,9 +98,9 @@
             }, time);
 
             setTimeout(() => {
-                containerDiv.style["transition"] = "opacity 30s ease-out";
+                containerDiv.style["transition"] = "opacity 10s ease-out";
                 containerDiv.style["opacity"] = "0";
-            }, speed / 2);
+            }, 45000);
         }
 
         function drawNumbers() {
@@ -91,11 +109,11 @@
             var sq_src = 10;
 
             createVideo((day - (day % 10)) / 10 + "-1", delay_time * 0, 0, 0, 1);
-            createVideo(day % 10 + "-2", delay_time * 1, 1, 0, 1);
-            createVideo("m" + month, delay_time * 2, 2, 0, 2);
-            createVideo((year % 100 - year % 10) / 10 + "-1", delay_time * 4, 4, 0, 1);
-            createVideo(year % 10 + "-2", delay_time * 5, 5, 0, 1);
-            createVideo("arrow", delay_time * 6, 6, 0, 2);
+            createVideo(day % 10 + "-2", delay_time * 1.5, 1, 0, 1);
+            createVideo("m" + month, delay_time * 2.5, 2, 0, 2);
+            createVideo((year % 100 - year % 10) / 10 + "-1", delay_time * 4.5, 4, 0, 1);
+            createVideo(year % 10 + "-2", delay_time * 5.5, 5, 0, 1);
+            createVideo("arrow", delay_time * 6.5, 6, 0, 2);
             createVideo("k", delay_time * 8, 8, 0, 1);
             createVideo((k_value - (k_value % 10)) / 10 + "-1", delay_time * 10, 9, 0, 1);
             createVideo(k_value % 10 + "-2", delay_time * 11, 10, 0, 1);
@@ -136,15 +154,25 @@
             var YearSum = 0;
             var MonthSum = 0;
 
-            while (MonthNum > 0) {
-                MonthSum = MonthSum + MonthNum % 10;
-                MonthNum = MonthNum / 10;
+            // Calculate cross sum of month number
+            var tempMonth = MonthNum;
+            while (tempMonth > 0) {
+                MonthSum = MonthSum + tempMonth % 10;
+                tempMonth = Math.floor(tempMonth / 10);  // Use Math.floor for integer division
             }
-            while (YearNum > 100) {
-                YearSum = YearSum + YearNum % 10;
-                YearNum = YearNum / 10;
+
+            // Get last two digits of year and calculate their cross sum
+            var lastTwoDigits = YearNum % 100;  // Extract last two digits
+            while (lastTwoDigits > 0) {
+                YearSum = YearSum + lastTwoDigits % 10;
+                lastTwoDigits = Math.floor(lastTwoDigits / 10);
             }
-            sum = Math.floor(DayNum + MonthSum + YearSum);
+
+            console.log("Day: " + DayNum);
+            console.log("Month sum: " + MonthSum);
+            console.log("Year sum: " + YearSum);
+
+            sum = DayNum + MonthSum + YearSum;
             return sum;
         }
 
