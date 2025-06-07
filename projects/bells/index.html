@@ -8,22 +8,20 @@
 
 <body>
 
-
-
     <style>
         html,
         body {
             margin: 0;
             padding: 0;
+            background-color: rgb(236, 236, 236);
         }
 
         body {
-            /* background: linear-gradient(180deg, rgb(35, 35, 35) 0%, rgba(212, 212, 212, 1) 100%); */
+            /* background: linear-gradient(180deg, rgb(35, 35, 35) 0%, rgba(212, 212, 212, 1) 100%);
             background-image: url("bg.jpg");
-            background-size: cover;
+            background-size: cover; */
         }
     </style>
-
 
     <script>
 
@@ -45,8 +43,6 @@
         var speed = 60000;
 
         var delay_time = 1400;
-        // var delay_time = 1400;
-        // var sf = 2.5;
         var sf = 2.8;
         var k_value = crossSum(day, month, year);
 
@@ -54,17 +50,12 @@
         document.body.appendChild(containerDiv);
         containerDiv.style.position = "fixed";
         containerDiv.style.left = (100 - (sf * 11)) / 2 + "vw";
-
         containerDiv.style.top = "27vh";
-
         containerDiv.style["filter"] = "invert(1)";
         containerDiv.style["mix-blend-mode"] = "multiply";
-        containerDiv.style["filter"] = "opacity(40%)";
-        // containerDiv.style["transform"] = "perspective(1cm) rotateX(28deg) rotateY(0deg)";
+        containerDiv.style["filter"] = "opacity(70%)";
         containerDiv.style["transform-style"] = "preserve-3d";
         containerDiv.setAttribute("id", "container");
-
-
 
         drawNumbers();
 
@@ -80,7 +71,6 @@
 
                 var vid = document.createElement('video');
                 vid.src = "vid/" + src + ".mp4";
-                document.getElementById('container').appendChild(vid);
                 vid.muted = true;
                 vid.autoplay = true;
                 vid.style["mix-blend-mode"] = "multiply";
@@ -89,7 +79,31 @@
                 vid.style.position = "absolute";
                 vid.style.left = posX * sf + "vw";
                 vid.style.top = posY * sf + "vw";
-                // vid.setAttribute("id", "ooo");
+
+                // Initially hide the video
+                vid.style.opacity = "0";
+                vid.style.transition = "opacity 0.3s ease-in";
+
+                // Add video to container
+                document.getElementById('container').appendChild(vid);
+
+                // Wait for video to load before showing it
+                vid.addEventListener('canplaythrough', function () {
+                    vid.style.opacity = "1";
+                });
+
+                // Fallback: show video after a timeout even if not fully loaded
+                setTimeout(() => {
+                    if (vid.style.opacity === "0") {
+                        vid.style.opacity = "1";
+                    }
+                }, 5000); // 5 second fallback
+
+                // Also handle the case where video is already loaded
+                if (vid.readyState >= 3) { // HAVE_FUTURE_DATA or HAVE_ENOUGH_DATA
+                    vid.style.opacity = "1";
+                }
+
             }, time);
 
             setTimeout(() => {
@@ -153,11 +167,11 @@
             var tempMonth = MonthNum;
             while (tempMonth > 0) {
                 MonthSum = MonthSum + tempMonth % 10;
-                tempMonth = Math.floor(tempMonth / 10);  // Use Math.floor for integer division
+                tempMonth = Math.floor(tempMonth / 10);
             }
 
             // Get last two digits of year and calculate their cross sum
-            var lastTwoDigits = YearNum % 100;  // Extract last two digits
+            var lastTwoDigits = YearNum % 100;
             while (lastTwoDigits > 0) {
                 YearSum = YearSum + lastTwoDigits % 10;
                 lastTwoDigits = Math.floor(lastTwoDigits / 10);
@@ -266,7 +280,6 @@
             prevDate[0] = prevDay;
             prevDate[1] = prevMonth;
             prevDate[2] = prevYear;
-
 
             return prevDate;
         }
