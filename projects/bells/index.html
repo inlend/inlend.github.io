@@ -16,7 +16,7 @@
         }
 
         body {
-            background-color: rgb(242, 242, 242);
+            background-color: rgb(255, 255, 255);
         }
     </style>
 
@@ -70,8 +70,7 @@
                 vid.src = "vid/" + src + ".mp4";
                 vid.muted = true;
                 vid.autoplay = true;
-                vid.style["mix-blend-mode"] = "multiply";
-                vid.style["filter"] = "blur(0px)";
+                // vid.style["mix-blend-mode"] = "multiply";
                 vid.style.width = scale * sf + "vw";
                 vid.style.position = "absolute";
                 vid.style.left = posX * sf + "vw";
