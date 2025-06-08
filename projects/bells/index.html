@@ -13,13 +13,10 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: rgb(236, 236, 236);
         }
 
         body {
-            /* background: linear-gradient(180deg, rgb(35, 35, 35) 0%, rgba(212, 212, 212, 1) 100%);
-            background-image: url("bg.jpg");
-            background-size: cover; */
+            background-color: rgb(242, 242, 242);
         }
     </style>
 
@@ -36,21 +33,21 @@
         });
 
         var today = new Date();
-        var day = today.getDate();
+        var day = 23;
         var month = today.getMonth() + 1;
         var year = today.getFullYear();
 
         var speed = 60000;
 
         var delay_time = 1400;
-        var sf = 2.8;
+        var sf = 2.3;
         var k_value = crossSum(day, month, year);
 
         var containerDiv = document.createElement('div');
         document.body.appendChild(containerDiv);
         containerDiv.style.position = "fixed";
         containerDiv.style.left = (100 - (sf * 11)) / 2 + "vw";
-        containerDiv.style.top = "27vh";
+        containerDiv.style.top = "33vh";
         containerDiv.style["filter"] = "invert(1)";
         containerDiv.style["mix-blend-mode"] = "multiply";
         containerDiv.style["filter"] = "opacity(70%)";
@@ -136,7 +133,7 @@
                     createVideo("sq" + k_value % 10, (delay_time * 12) + (i * 2000), 1.5, sq_pos, 8);
                 }
                 k_value -= 10;
-                sq_pos += 1.2;
+                sq_pos += 1.5;
             }
         }
 
